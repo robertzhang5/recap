@@ -308,17 +308,9 @@ I ship this daily, so things are always in motion. A few things on the active ro
 
 ## About me
 
-Robert Zhang — University of Chicago. Recruiting for startup software / ML engineering internships. I build things people actually use.
+Robert Zhang — student-athlete at the University of Chicago studying economics. I play varsity tennis. Incoming investment banking summer analyst at Goldman Sachs in the TMT group. I build things people actually use.
 
 - Live product: [recap.network](https://recap.network)
 - GitHub: [@robertzhang5](https://github.com/robertzhang5)
-- Email: open an issue here or DM me on LinkedIn
-
-If you're a recruiter and want to walk through the private source code, **email me and I'll add you as a read-only collaborator** on the main repo. Most interesting files to skim are:
-- `webapp/services/ai_service.py` — prompt engineering, sanitizers, style profiles (~2000 lines)
-- `webapp/services/calendar_service.py` — multi-calendar fetch, timezone handling, networking filter
-- `webapp/services/transcription_service.py` + `deepgram_client.py` — speech pipeline
-- `webapp/services/style_profile_service.py` — how the email-style learning compounds
-- `webapp/services/chat_service.py` — the tool-using assistant over your network
-
-Happy to walk through any of it.
+- LinkedIn: [linkedin.com/in/robert-zhang-78a061264](https://www.linkedin.com/in/robert-zhang-78a061264/)
+- Email: [robertzhang@uchicago.edu](mailto:robertzhang@uchicago.edu)

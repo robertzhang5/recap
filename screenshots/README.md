@@ -1,24 +1,23 @@
 # Screenshots
 
-The main README references these PNGs. Add them here to make them render on the GitHub page.
+The main README references these PNGs.
 
-## Core flow (already added)
+## Core flow
 
-- ✅ `01-dashboard.png` — the user dashboard with stats + recent activity
-- ✅ `02-contact-detail.png` — a contact's profile page with AI summary, notes, interactions, ratings
-- ✅ `03-calendar.png` — month view with networking events filtered in
-- ✅ `04-email-drafter.png` — the draft-email panel mid-generation
+- ✅ `01-dashboard.png`
+- ✅ `02-contact-detail.png`
+- ✅ `03-calendar.png`
+- ✅ `04-email-drafter.png`
 
-## Power features (to add)
+## Power features
 
-- ⬜ `05-search.png` — the search results page showing semantic search + filters
-- ⬜ `06-chat-agent.png` — the in-app chat assistant answering a network question
-- ⬜ `07-reminders.png` — the reminders / who-to-reach-out-to-next view
-- ⬜ `08-live-recording.png` — the live note-taking screen during a call
+- ✅ `05-search.png`
+- ✅ `06-chat-agent.png`
+- ✅ `07-reminders.png`
+- ✅ `08-live-recording.png`
 
-## Tips
+## Tips for future shots
 
 - Use **Cmd + Shift + 4** then drag a rectangle. The PNG saves to your Desktop.
-- Rename to the exact filename above.
-- Recommended width: 1600–2000px (retina-quality is best).
-- Drop the file in this `screenshots/` folder, then push to GitHub.
+- Recommended width: 1600–2000px (retina is best).
+- Drop into this folder, rename to match, then push.

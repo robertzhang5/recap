@@ -39,12 +39,17 @@ Plus: semantic search across contacts, alumni detection, LinkedIn / Excel / Word
 
 ### Power features
 
-> *More screenshots coming — see `screenshots/README.md` for the planned set.*
+**Search — semantic + filterable contact browse**
+![Search](screenshots/05-search.png)
 
-- **Search** — semantic + filterable contact browse (`05-search.png`)
-- **Chat agent** — ask anything about your network in natural language (`06-chat-agent.png`)
-- **Reminders** — automated nudges for who to follow up with next (`07-reminders.png`)
-- **Live recording** — in-browser recording with real-time transcription (`08-live-recording.png`)
+**Chat agent — ask anything about your network in natural language**
+![Chat agent](screenshots/06-chat-agent.png)
+
+**Reminders — automated nudges for who to follow up with next**
+![Reminders](screenshots/07-reminders.png)
+
+**Live recording — in-browser recording with real-time transcription**
+![Live recording](screenshots/08-live-recording.png)
 
 ---
 

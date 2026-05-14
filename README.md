@@ -1,6 +1,6 @@
 # Recap
 
-**A personal CRM that records your networking conversations, structures them with AI, and writes the follow-up email that sounds like you.**
+**A networker's CRM: record your calls, rate them, draft the follow-up email, sync your calendar, search by what you remember, ask the built-in agent anything, and get automated reminders for who to reach out to next.**
 
 🔗 **Live product:** [recap.network](https://recap.network) (you can sign up and try it)
 🔒 **Source code:** Private. Email me for a walkthrough.
@@ -9,24 +9,42 @@
 
 ## What it does
 
-Recap turns a coffee chat, phone screen, or 1:1 into structured memory you actually use.
+Recap is the full loop around a single networking conversation — from before it happens to weeks after. Five pillars, all in one app:
 
-1. **Record the conversation.** Hit record in the app (or upload audio after). Recap transcribes with speaker diarization, corrects misheard names against your contact list, and saves the transcript on the contact.
-2. **Get structured memory.** The contact's page gets a refreshed AI bullet-point summary on every change, a clean paraphrase of the raw transcript, and an interaction logged on the timeline. All auto-regenerated when you edit anything.
-3. **Send a follow-up that fits.** Click "Draft Email" and Recap reads the transcript for what you and they actually agreed to — the GitHub link you promised, the August reconnect, the specific role you discussed — and writes a draft that references it. The model learns from your prior approved drafts so its voice converges to yours.
+1. **Record and rate.** Hit record (or upload audio after) for any coffee chat, 1:1, phone screen, or interview. Recap transcribes with speaker diarization, corrects misheard names against your contacts, attaches the transcript to the right person, and prompts you to rate the conversation (quality, closeness, professional relevance).
+2. **Email drafting tailored to the call.** Click "Draft Email" and Recap reads the transcript for what you and they actually agreed to — the GitHub link you promised, the August reconnect, the specific role you discussed — and writes a draft that references it. The model learns your voice from your prior approved drafts.
+3. **Google Calendar built in.** Recap syncs every calendar you can read (primary + shared + subscribed), filters the month view to networking-only (calls, coffees, interviews, anyone with a name in the title), and lets you jump straight from a meeting into recording or note-taking.
+4. **Built-in chat agent.** A tool-using assistant tailored to your network. "Who do I know at Goldman?", "Show me everyone I haven't talked to in 90 days", "Find the founder I met about data labeling" — it queries your contacts, interactions, notes, and calendar to answer.
+5. **Automated reminders.** Configurable cadence-based reminders for who to reach out to next, based on your interaction history and closeness ratings. ([Still being built out](#whats-still-being-built) — current version surfaces stale relationships; future versions trigger SMS/email pings.)
 
-Plus: Google Calendar sync with networking-only filtering, semantic search over contacts, alumni detection, LinkedIn/Excel import, one-click web enrichment with conflict resolution, ratings, reminders, dashboard analytics, dark/light mode.
+Plus: semantic search across contacts, alumni detection, LinkedIn / Excel / Word import, one-click web enrichment with conflict resolution, dashboard analytics, dark/light mode.
 
 ---
 
 ## Screenshots
 
-> Screenshots in `screenshots/` — dashboard, contact detail, calendar, email drafter, live recording.
+### Core flow
 
-| | |
-|---|---|
-| ![Dashboard](screenshots/01-dashboard.png) | ![Contact detail](screenshots/02-contact-detail.png) |
-| ![Calendar](screenshots/03-calendar.png) | ![Email drafter](screenshots/04-email-drafter.png) |
+**Dashboard — your network at a glance**
+![Dashboard](screenshots/01-dashboard.png)
+
+**Contact detail — AI summary, formatted notes, ratings, interactions, raw notes, documents**
+![Contact detail](screenshots/02-contact-detail.png)
+
+**Calendar — networking-only month view, synced across all your Google calendars**
+![Calendar](screenshots/03-calendar.png)
+
+**Email drafter — references the actual conversation, learns your voice**
+![Email drafter](screenshots/04-email-drafter.png)
+
+### Power features
+
+> *More screenshots coming — see `screenshots/README.md` for the planned set.*
+
+- **Search** — semantic + filterable contact browse (`05-search.png`)
+- **Chat agent** — ask anything about your network in natural language (`06-chat-agent.png`)
+- **Reminders** — automated nudges for who to follow up with next (`07-reminders.png`)
+- **Live recording** — in-browser recording with real-time transcription (`08-live-recording.png`)
 
 ---
 
@@ -40,6 +58,7 @@ This isn't a course project. It's a real product I use every day and ship to dai
 - **Three-layer name correction.** Generic STT mishears proper nouns. I correct in three passes: (1) feed contact names as Deepgram keyterms / Whisper prompts for bias, (2) post-pass with Claude to snap misheard tokens to known vocabulary, (3) fuzzy-match the corrected transcript against the user's contact list to attach interactions automatically.
 - **Semantic search.** Voyage AI embeddings on contact summaries, stored as `BLOB` in SQLite / `BYTEA` in Postgres, served via top-k cosine. Embeddings rebuild in a background thread the first time a user hits the app post-import.
 - **Style-learning email drafts.** When the user approves or edits a draft, I diff the AI output vs. the edited version and extract the user's voice into a structured profile (preferred openers, sign-off shape, banned phrases, tone, length). Three layers — global / per-category / per-contact — compound across approvals so corrections actually stick.
+- **Tool-using chat agent.** The in-app assistant has access to typed tools that query contacts, interactions, notes, and calendar. It reasons over what the user actually has, not what it imagines.
 
 ### Engineering against AI failure modes
 
@@ -85,7 +104,7 @@ Most "Google Calendar in your app" tutorials stop at `events.list` against the p
 |---|---|
 | Backend | Python 3.13, Flask 3, Flask-Login, Gunicorn |
 | Database | SQLite (dev), Postgres (prod) |
-| AI / ML | Anthropic Claude Sonnet 4.5, OpenAI Whisper + GPT-4o-transcribe, Deepgram Nova-3 (live + diarization), Voyage AI (embeddings) |
+| AI / ML | Anthropic Claude Sonnet 4.5 (drafting, summaries, chat agent), OpenAI Whisper + GPT-4o-transcribe, Deepgram Nova-3 (live + diarization), Voyage AI (embeddings) |
 | Frontend | Server-rendered Jinja2, Alpine.js, Quill (rich text), Bootstrap 5 utilities, hand-rolled CSS |
 | Auth | Per-user accounts, Google OAuth 2.0 with encrypted refresh-token storage |
 | Storage | Cloudflare R2 (prod), local FS (dev) |
@@ -272,6 +291,16 @@ See `ARCHITECTURE.md` for the longer version.
 
 ---
 
+## What's still being built
+
+I ship this daily, so things are always in motion. A few things on the active roadmap:
+
+- **Reminders v2.** Current version surfaces stale relationships in the UI. The next iteration triggers automated SMS / email pings based on per-contact cadence rules and your closeness rating.
+- **Multi-account Google.** Right now Recap reads one connected Google account. Users with a personal + work Gmail want both — straightforward extension of the existing OAuth code.
+- **Voice-driven note review.** Read back the AI summary aloud and let the user accept / edit / regenerate by voice. Useful for between-meeting downtime.
+
+---
+
 ## About me
 
 Robert Zhang — University of Chicago. Recruiting for startup software / ML engineering internships. I build things people actually use.
@@ -285,5 +314,6 @@ If you're a recruiter and want to walk through the private source code, **email 
 - `webapp/services/calendar_service.py` — multi-calendar fetch, timezone handling, networking filter
 - `webapp/services/transcription_service.py` + `deepgram_client.py` — speech pipeline
 - `webapp/services/style_profile_service.py` — how the email-style learning compounds
+- `webapp/services/chat_service.py` — the tool-using assistant over your network
 
 Happy to walk through any of it.

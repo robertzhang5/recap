@@ -308,7 +308,7 @@ I ship this daily, so things are always in motion. A few things on the active ro
 
 ## About me
 
-Robert Zhang — student-athlete at the University of Chicago studying economics. I play varsity tennis. Incoming investment banking summer analyst at Goldman Sachs in the TMT group. I build things people actually use.
+Robert Zhang — student-athlete at the University of Chicago studying economics and playing Varsity Tennis. Incoming Investment Banking Summer Analyst at Goldman Sachs in the TMT Group. Building AI tools.
 
 - Live product: [recap.network](https://recap.network)
 - GitHub: [@robertzhang5](https://github.com/robertzhang5)
